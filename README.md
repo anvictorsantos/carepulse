@@ -32,35 +32,35 @@ Before you begin, ensure you have the following installed:
 ### Installation
 
 1. Clone the repository:
-    \`\`\`bash
+    ```bash
     git clone https://github.com/yourusername/healthcare-patient-management.git
     cd healthcare-patient-management
-    \`\`\`
+    ```
 
 2. Install dependencies:
-    \`\`\`bash
+    ```bash
     npm install
     # or
     yarn install
-    \`\`\`
+    ```
 
 3. Configure environment variables:
 
    Create a \`.env.local\` file in the root directory and add your Appwrite and Twilio credentials:
 
-    \`\`\`bash
+    ```bash
     NEXT_PUBLIC_APPWRITE_ENDPOINT=your-appwrite-endpoint
     NEXT_PUBLIC_APPWRITE_PROJECT=your-appwrite-project-id
     TWILIO_ACCOUNT_SID=your-twilio-account-sid
     TWILIO_AUTH_TOKEN=your-twilio-auth-token
-    \`\`\`
+    ```
 
 4. Run the development server:
-    \`\`\`bash
+    ```bash
     npm run dev
     # or
     yarn dev
-    \`\`\`
+    ```
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
