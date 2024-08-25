@@ -9,6 +9,8 @@ export default function Home() {
   
   return (
     <div className="flex h-screen max-h-screen">
+      {/* TODO: OTP Verification | PasskeyModal */}
+      
       <section className="my-auto container remove-scrollbar">
         <div className="max-w-[496px] sub-container">
           <Image  
