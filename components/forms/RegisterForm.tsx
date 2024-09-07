@@ -3,7 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { Form } from '@/components/ui/form';
+import { Form, FormControl } from '@/components/ui/form';
 import CustomFormField from '../CustomFormField';
 import SubmitButton from '../SubmitButton';
 import { useState } from 'react';
@@ -11,6 +11,10 @@ import { UserFormValidation } from '@/lib/validation';
 import { useRouter } from 'next/navigation';
 import { createUser } from '@/lib/actions/patient.actions';
 import { FormFieldType } from './PatientForm';
+import { RadioGroup } from '../ui/radio-group';
+import { GenderOptions } from '@/constants';
+import { RadioGroupItem } from '@radix-ui/react-radio-group';
+import { Label } from '../ui/label';
 
 const RegisterForm = ({ user }: { user: User }) => {
     const router = useRouter();
@@ -66,6 +70,7 @@ const RegisterForm = ({ user }: { user: User }) => {
                     fieldType={FormFieldType.INPUT}
                     control={form.control}
                     name="name"
+                    label="Full Name"
                     placeholder="John Doe"
                     iconSrc="/assets/icons/user.svg"
                     iconAlt="user"
@@ -90,6 +95,52 @@ const RegisterForm = ({ user }: { user: User }) => {
                         placeholder="(555) 123-456"
                     />
                 </div>
+
+                <div className="flex flex-col gap-6 xl:flex-row">
+                    <CustomFormField
+                        fieldType={FormFieldType.DATE_PICKER}
+                        control={form.control}
+                        name="birthDate"
+                        label="Date of Birth"
+                    />
+
+                    <CustomFormField
+                        fieldType={FormFieldType.SKELETON}
+                        control={form.control}
+                        name="gender"
+                        label="Gender"
+                        renderSkeleton={(field) => (
+                            <FormControl>
+                                <RadioGroup
+                                    className="flex h-11 gap-6 xl:justify-between"
+                                    onValueChange={field.onChange}
+                                    defaultValue={field.value}
+                                >
+                                    {GenderOptions.map((option) => (
+                                        <div
+                                            key={option}
+                                            className="radio-group"
+                                        >
+                                            <RadioGroupItem
+                                                value={option}
+                                                id={option}
+                                            />
+                                            <Label
+                                                htmlFor={option}
+                                                className="cursor-point"
+                                            >
+                                                {option}
+                                            </Label>
+                                        </div>
+                                    ))}
+                                </RadioGroup>
+                            </FormControl>
+                        )}
+                    />
+                </div>
+                <div className="flex flex-col gap-6 xl:flex-row"></div>
+                <div className="flex flex-col gap-6 xl:flex-row"></div>
+                <div className="flex flex-col gap-6 xl:flex-row"></div>
 
                 <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
             </form>
