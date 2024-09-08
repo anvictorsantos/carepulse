@@ -1,15 +1,17 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { z } from 'zod';
+
 import { Form } from '@/components/ui/form';
+import { createUser } from '@/lib/actions/patient.actions';
+import { UserFormValidation } from '@/lib/validation';
+
 import CustomFormField from '../CustomFormField';
 import SubmitButton from '../SubmitButton';
-import { useState } from 'react';
-import { UserFormValidation } from '@/lib/validation';
-import { useRouter } from 'next/navigation';
-import { createUser } from '@/lib/actions/patient.actions';
 
 export enum FormFieldType {
     INPUT = 'input',
@@ -26,12 +28,12 @@ const PatientForm = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     const form = useForm<z.infer<typeof UserFormValidation>>({
-        resolver: zodResolver(UserFormValidation),
         defaultValues: {
-            name: '',
             email: '',
+            name: '',
             phone: "'",
         },
+        resolver: zodResolver(UserFormValidation),
     });
 
     async function onSubmit({
@@ -42,7 +44,7 @@ const PatientForm = () => {
         setIsLoading(true);
 
         try {
-            const userData = { name, email, phone };
+            const userData = { email, name, phone };
 
             const user = await createUser(userData);
 

@@ -1,31 +1,34 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { z } from 'zod';
+
 import { Form, FormControl } from '@/components/ui/form';
+import { GenderOptions } from '@/constants';
+import { createUser } from '@/lib/actions/patient.actions';
+import { UserFormValidation } from '@/lib/validation';
+
 import CustomFormField from '../CustomFormField';
 import SubmitButton from '../SubmitButton';
-import { useState } from 'react';
-import { UserFormValidation } from '@/lib/validation';
-import { useRouter } from 'next/navigation';
-import { createUser } from '@/lib/actions/patient.actions';
-import { FormFieldType } from './PatientForm';
-import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
-import { GenderOptions } from '@/constants';
 import { Label } from '../ui/label';
+import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
+
+import { FormFieldType } from './PatientForm';
 
 const RegisterForm = ({ user }: { user: User }) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
 
     const form = useForm<z.infer<typeof UserFormValidation>>({
-        resolver: zodResolver(UserFormValidation),
         defaultValues: {
-            name: '',
             email: '',
+            name: '',
             phone: "'",
         },
+        resolver: zodResolver(UserFormValidation),
     });
 
     async function onSubmit({
@@ -36,7 +39,7 @@ const RegisterForm = ({ user }: { user: User }) => {
         setIsLoading(true);
 
         try {
-            const userData = { name, email, phone };
+            const userData = { email, name, phone };
 
             const user = await createUser(userData);
 

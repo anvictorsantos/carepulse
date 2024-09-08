@@ -1,26 +1,28 @@
 'use client';
 
+import DatePicker from 'react-datepicker';
 import { Control } from 'react-hook-form';
+import PhoneInput from 'react-phone-number-input';
+import { E164Number } from 'libphonenumber-js/core';
+import Image from 'next/image';
+
+import { Input } from '@/components/ui/input';
+
+import { FormFieldType } from './forms/PatientForm';
 import {
+    FormControl,
     FormField,
     FormItem,
     FormLabel,
-    FormControl,
     FormMessage,
 } from './ui/form';
-import { Input } from '@/components/ui/input';
-import Image from 'next/image';
-import { FormFieldType } from './forms/PatientForm';
-import 'react-phone-number-input/style.css';
-import PhoneInput from 'react-phone-number-input';
-import { E164Number } from 'libphonenumber-js/core';
-import DatePicker from 'react-datepicker';
 
+import 'react-phone-number-input/style.css';
 import 'react-datepicker/dist/react-datepicker.css';
 
 interface CustomProps {
-    control: Control<any>;
     fieldType: FormFieldType;
+    control: Control<any>;
     name: string;
     label?: string;
     placeholder?: string;
