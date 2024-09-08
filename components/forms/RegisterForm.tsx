@@ -11,9 +11,8 @@ import { UserFormValidation } from '@/lib/validation';
 import { useRouter } from 'next/navigation';
 import { createUser } from '@/lib/actions/patient.actions';
 import { FormFieldType } from './PatientForm';
-import { RadioGroup } from '../ui/radio-group';
+import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
 import { GenderOptions } from '@/constants';
-import { RadioGroupItem } from '@radix-ui/react-radio-group';
 import { Label } from '../ui/label';
 
 const RegisterForm = ({ user }: { user: User }) => {
@@ -127,7 +126,7 @@ const RegisterForm = ({ user }: { user: User }) => {
                                             />
                                             <Label
                                                 htmlFor={option}
-                                                className="cursor-point"
+                                                className="cursor-pointer"
                                             >
                                                 {option}
                                             </Label>
