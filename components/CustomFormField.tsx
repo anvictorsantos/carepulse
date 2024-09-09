@@ -16,6 +16,7 @@ import {
     FormLabel,
     FormMessage,
 } from './ui/form';
+import { Select, SelectContent, SelectTrigger, SelectValue } from './ui/select';
 
 import 'react-phone-number-input/style.css';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -106,6 +107,24 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
             );
         case FormFieldType.SKELETON:
             return renderSkeleton ? renderSkeleton(field) : null;
+        case FormFieldType.SELECT:
+            return (
+                <FormControl>
+                    <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                    >
+                        <FormControl>
+                            <SelectTrigger className="shad-select-trigger">
+                                <SelectValue placeholder={placeholder} />
+                            </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className="shad-select-content">
+                            {props.children}
+                        </SelectContent>
+                    </Select>
+                </FormControl>
+            );
         default:
             break;
     }
