@@ -15,7 +15,7 @@ import SubmitButton from '../SubmitButton';
 
 export enum FormFieldType {
     INPUT = 'input',
-    TEXTARE = 'textarea',
+    TEXTAREA = 'textarea',
     PHONE_INPUT = 'phoneInput',
     CHECKBOX = 'checkbox',
     DATE_PICKER = 'datePicker',
