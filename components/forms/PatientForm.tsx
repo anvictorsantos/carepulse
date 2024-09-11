@@ -6,13 +6,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 
+import CustomFormField from '@/components/CustomFormField';
+import SubmitButton from '@/components/SubmitButton';
 import { Form } from '@/components/ui/form';
 import { createUser } from '@/lib/actions/patient.actions';
 import { UserFormValidation } from '@/lib/validations';
 
-import CustomFormField from '../CustomFormField';
-import SubmitButton from '../SubmitButton';
-
+/* eslint-disable no-unused-vars */
 export enum FormFieldType {
     INPUT = 'input',
     TEXTAREA = 'textarea',

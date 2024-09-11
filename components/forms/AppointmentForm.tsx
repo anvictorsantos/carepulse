@@ -7,16 +7,14 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 
+import CustomFormField from '@/components/CustomFormField';
+import { FormFieldType } from '@/components/forms/PatientForm';
+import SubmitButton from '@/components/SubmitButton';
 import { Form } from '@/components/ui/form';
+import { SelectItem } from '@/components/ui/select';
 import { Doctors } from '@/constants';
 import { createAppointment } from '@/lib/actions/appointment.actions';
 import { getAppointmentSchema } from '@/lib/validations';
-
-import CustomFormField from '../CustomFormField';
-import SubmitButton from '../SubmitButton';
-import { SelectItem } from '../ui/select';
-
-import { FormFieldType } from './PatientForm';
 
 const AppointmentForm = ({
     userId,

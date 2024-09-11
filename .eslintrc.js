@@ -64,10 +64,29 @@ module.exports = {
         'prettier/prettier': 'warn',
         'simple-import-sort/imports': 'error',
         'simple-import-sort/exports': 'error',
+        'no-restricted-imports': [
+            'error',
+            {
+                patterns: ['.*'],
+            },
+        ],
+        'no-unused-vars': [
+            'error',
+            {
+                varsIgnorePattern: '^_',
+                argsIgnorePattern: '^_',
+            },
+        ],
     },
     settings: {
         react: {
             version: 'detect',
+        },
+        'import/resolver': {
+            alias: {
+                extensions: ['.js', '.jsx', '.ts', '.tsx'],
+                map: [['@', '.']],
+            },
         },
     },
     overrides: [

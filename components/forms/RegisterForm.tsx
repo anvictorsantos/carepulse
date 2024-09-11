@@ -7,24 +7,22 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 
+import CustomFormField from '@/components/CustomFormField';
+import FileUploader from '@/components/FileUploader';
+import { FormFieldType } from '@/components/forms/PatientForm';
+import SubmitButton from '@/components/SubmitButton';
 import { Form, FormControl } from '@/components/ui/form';
+import { Label } from '@/components/ui/label';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { SelectItem } from '@/components/ui/select';
 import {
     Doctors,
     GenderOptions,
     IdentificationTypes,
     PatientFormDefaultValues,
 } from '@/constants';
-import { createUser, registerPatient } from '@/lib/actions/patient.actions';
+import { registerPatient } from '@/lib/actions/patient.actions';
 import { PatientFormValidation } from '@/lib/validations';
-
-import CustomFormField from '../CustomFormField';
-import FileUploader from '../FileUploader';
-import SubmitButton from '../SubmitButton';
-import { Label } from '../ui/label';
-import { RadioGroup, RadioGroupItem } from '../ui/radio-group';
-import { SelectItem } from '../ui/select';
-
-import { FormFieldType } from './PatientForm';
 
 const RegisterForm = ({ user }: { user: User }) => {
     const router = useRouter();

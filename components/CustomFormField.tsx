@@ -6,19 +6,23 @@ import PhoneInput from 'react-phone-number-input';
 import { E164Number } from 'libphonenumber-js/core';
 import Image from 'next/image';
 
-import { Input } from '@/components/ui/input';
-
-import { FormFieldType } from './forms/PatientForm';
-import { Checkbox } from './ui/checkbox';
+import { FormFieldType } from '@/components/forms/PatientForm';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
     FormControl,
     FormField,
     FormItem,
     FormLabel,
     FormMessage,
-} from './ui/form';
-import { Select, SelectContent, SelectTrigger, SelectValue } from './ui/select';
-import { Textarea } from './ui/textarea';
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import {
+    Select,
+    SelectContent,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 
 import 'react-phone-number-input/style.css';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -35,7 +39,7 @@ interface CustomProps {
     dateFormat?: string;
     showTimeSelect?: boolean;
     children?: React.ReactNode;
-    renderSkeleton?: (field: any) => React.ReactNode;
+    renderSkeleton?: (_field: any) => React.ReactNode;
 }
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {

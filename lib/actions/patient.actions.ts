@@ -12,8 +12,8 @@ import {
     PROJECT_ID,
     storage,
     users,
-} from '../appwrite.config';
-import { parseStringify } from '../utils';
+} from '@/lib/appwrite.config';
+import { parseStringify } from '@/lib/utils';
 
 export const createUser = async (user: CreateUserParams) => {
     try {
