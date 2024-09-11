@@ -4,7 +4,7 @@ import { Plus_Jakarta_Sans } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
 import { cn } from '@/lib/utils';
 
-import '@/globals.css';
+import '@/app/globals.css';
 
 const fontSans = Plus_Jakarta_Sans({
     subsets: ['latin'],
