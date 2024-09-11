@@ -56,7 +56,7 @@ const AppointmentForm = ({
                 status = 'cancel';
                 break;
             default:
-                status = 'pendind';
+                status = 'pending';
                 break;
         }
 
@@ -77,7 +77,7 @@ const AppointmentForm = ({
                 if (appointment) {
                     form.reset();
                     router.push(
-                        `/patients/${userId}/new-appointment/success?appointmentId=${appointment.id}`,
+                        `/patients/${userId}/new-appointment/success?appointmentId=${appointment.$id}`,
                     );
                 }
             }
