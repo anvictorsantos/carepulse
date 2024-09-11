@@ -8,7 +8,7 @@ import { z } from 'zod';
 
 import { Form } from '@/components/ui/form';
 import { createUser } from '@/lib/actions/patient.actions';
-import { UserFormValidation } from '@/lib/validation';
+import { UserFormValidation } from '@/lib/validations';
 
 import CustomFormField from '../CustomFormField';
 import SubmitButton from '../SubmitButton';
