@@ -3,27 +3,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import StatCard from '@/components/StatCard';
-import { columns, Payment } from '@/components/table/columns';
+import { columns } from '@/components/table/columns';
 import { DataTable } from '@/components/table/DataTable';
 import { getRecentAppointmentList } from '@/lib/actions/appointment.actions';
 
-async function getData(): Promise<Payment[]> {
-    // Fetch data from your API here.
-    return [
-        {
-            id: '728ed52f',
-            amount: 100,
-            status: 'pending',
-            email: 'm@example.com',
-        },
-        // ...
-    ];
-}
-
 const Admin = async () => {
     const appointments = await getRecentAppointmentList();
-
-    const data = await getData();
 
     return (
         <div className="mx-auto flex max-w-7xl flex-col space-y-14">
@@ -70,8 +55,7 @@ const Admin = async () => {
                     />
                 </section>
 
-                {/* <DataTable columns={columns} data={appointments.documents} /> */}
-                <DataTable columns={columns} data={data} />
+                <DataTable columns={columns} data={appointments.documents} />
             </main>
         </div>
     );
