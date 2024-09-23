@@ -38,11 +38,25 @@ export const columns: ColumnDef<Patient>[] = [
     {
         id: 'actions',
         header: () => <div className="pl-4">Action</div>,
-        cell: ({ row }) => {
-            console.log(row);
+        cell: ({ row: { original: data } }) => {
             return (
                 <div className="flex gap-1">
-                    <AppointmentModal />
+                    <AppointmentModal
+                        type="scheduled"
+                        patientId={data.id}
+                        userId={data.id}
+                        appointment={data}
+                        title="Schedule Appointment"
+                        description="Please confirm the following details to scheduled"
+                    />
+                    <AppointmentModal
+                        type="cancel"
+                        patientId={data.id}
+                        userId={data.id}
+                        appointment={data}
+                        title="Cancel Appointment"
+                        description="Are you sure you want to cancel this appointment?"
+                    />
                 </div>
             );
         },
