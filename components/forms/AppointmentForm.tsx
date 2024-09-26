@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
@@ -26,14 +26,12 @@ const AppointmentForm = ({
     type,
     appointment,
     setOpen,
-    timeZone,
 }: {
     userId: string;
     patientId: string;
     type: 'create' | 'cancel' | 'schedule';
     appointment?: Appointment;
-    setOpen: (open: boolean) => void;
-    timeZone: string;
+    setOpen?: Dispatch<SetStateAction<boolean>>;
 }) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
@@ -46,9 +44,7 @@ const AppointmentForm = ({
             schedule: appointment ? new Date(appointment.schedule) : new Date(),
             reason: appointment ? appointment.reason : '',
             note: appointment ? appointment.note : '',
-            cancellationReason: appointment
-                ? appointment.cancellationReason
-                : '',
+            cancellationReason: appointment?.cancellationReason ?? '',
         },
         resolver: zodResolver(AppointmentFormValidation),
     });
@@ -93,7 +89,7 @@ const AppointmentForm = ({
             } else {
                 const appointmentToUpdate = {
                     userId,
-                    appointmentId: appointment?.$id,
+                    appointmentId: appointment!.$id,
                     appointment: {
                         primaryPhysician: values.primaryPhysician,
                         schedule: new Date(values.schedule),
@@ -106,8 +102,8 @@ const AppointmentForm = ({
                 const updatedAppointment =
                     await updateAppointment(appointmentToUpdate);
 
-                if (updateAppointment) {
-                    setOpen && setOpen(false);
+                if (updatedAppointment) {
+                    if (setOpen) setOpen(false);
                     form.reset();
                 }
             }

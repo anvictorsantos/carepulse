@@ -17,13 +17,11 @@ const AppointmentModal = ({
     patientId,
     userId,
     appointment,
-    timeZone,
 }: {
     type: 'create' | 'cancel' | 'schedule';
     patientId: string;
     userId: string;
     appointment?: Appointment;
-    timeZone: string;
 }) => {
     const [open, setOpen] = useState(false);
 
@@ -58,7 +56,6 @@ const AppointmentModal = ({
                     type={type}
                     appointment={appointment}
                     setOpen={setOpen}
-                    timeZone={timeZone}
                 ></AppointmentForm>
             </DialogContent>
         </Dialog>

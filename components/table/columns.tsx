@@ -6,6 +6,7 @@ import AppointmentModal from '@/components/AppointmentModal';
 import StatusBadge from '@/components/StatusBadge';
 import { Doctors } from '@/constants';
 import { formatDateTime } from '@/lib/utils';
+import { Appointment } from '@/types/appwrite.types';
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -19,6 +20,8 @@ export type Patient = {
     id: string;
     schedule: Date;
     status: 'pending' | 'scheduled' | 'cancelled';
+    type: 'create' | 'cancel' | 'schedule';
+    appointment?: Appointment;
 };
 
 export const columns: ColumnDef<Patient>[] = [
@@ -42,21 +45,23 @@ export const columns: ColumnDef<Patient>[] = [
             return (
                 <div className="flex gap-1">
                     <AppointmentModal
-                        type="scheduled"
+                        type="schedule"
                         patientId={data.id}
                         userId={data.id}
-                        appointment={data}
-                        title="Schedule Appointment"
-                        description="Please confirm the following details to scheduled"
+                        appointment={data.appointment}
                     />
+                    {/* TODO: implement later */}
+                    {/* title="Schedule Appointment"
+                        description="Please confirm the following details to scheduled" */}
                     <AppointmentModal
                         type="cancel"
                         patientId={data.id}
                         userId={data.id}
-                        appointment={data}
-                        title="Cancel Appointment"
-                        description="Are you sure you want to cancel this appointment?"
+                        appointment={data.appointment}
                     />
+                    {/* TODO: implement later */}
+                    {/* title="Cancel Appointment"
+                        description="Are you sure you want to cancel this appointment?" */}
                 </div>
             );
         },
