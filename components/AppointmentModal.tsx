@@ -25,8 +25,6 @@ const AppointmentModal = ({
 }) => {
     const [open, setOpen] = useState(false);
 
-    console.log(patientId);
-    console.log(userId);
     console.log(appointment);
 
     return (

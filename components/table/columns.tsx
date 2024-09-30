@@ -10,21 +10,8 @@ import { Appointment } from '@/types/appwrite.types';
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Patient = {
-    amount: number;
-    email: string;
-    patient: {
-        name: string;
-    };
-    primaryPhysician: string;
-    id: string;
-    schedule: Date;
-    status: 'pending' | 'scheduled' | 'cancelled';
-    type: 'create' | 'cancel' | 'schedule';
-    appointment?: Appointment;
-};
 
-export const columns: ColumnDef<Patient>[] = [
+export const columns: ColumnDef<Appointment>[] = [
     {
         header: 'ID',
         cell: ({ row }) => <p className="text-14-medium">{row.index + 1}</p>,
@@ -48,7 +35,7 @@ export const columns: ColumnDef<Patient>[] = [
                         type="schedule"
                         patientId={data.id}
                         userId={data.id}
-                        appointment={data.appointment}
+                        appointment={data}
                     />
                     {/* TODO: implement later */}
                     {/* title="Schedule Appointment"
@@ -57,7 +44,7 @@ export const columns: ColumnDef<Patient>[] = [
                         type="cancel"
                         patientId={data.id}
                         userId={data.id}
-                        appointment={data.appointment}
+                        appointment={data}
                     />
                     {/* TODO: implement later */}
                     {/* title="Cancel Appointment"
