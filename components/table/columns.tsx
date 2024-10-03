@@ -8,12 +8,9 @@ import { Doctors } from '@/constants';
 import { formatDateTime } from '@/lib/utils';
 import { Appointment } from '@/types/appwrite.types';
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-
 export const columns: ColumnDef<Appointment>[] = [
     {
-        header: 'ID',
+        header: '#',
         cell: ({ row }) => <p className="text-14-medium">{row.index + 1}</p>,
     },
     {
@@ -26,40 +23,14 @@ export const columns: ColumnDef<Appointment>[] = [
         },
     },
     {
-        id: 'actions',
-        header: () => <div className="pl-4">Action</div>,
-        cell: ({ row: { original: data } }) => {
-            return (
-                <div className="flex gap-1">
-                    <AppointmentModal
-                        type="schedule"
-                        patientId={data.id}
-                        userId={data.id}
-                        appointment={data}
-                    />
-                    {/* TODO: implement later */}
-                    {/* title="Schedule Appointment"
-                        description="Please confirm the following details to scheduled" */}
-                    <AppointmentModal
-                        type="cancel"
-                        patientId={data.id}
-                        userId={data.id}
-                        appointment={data}
-                    />
-                    {/* TODO: implement later */}
-                    {/* title="Cancel Appointment"
-                        description="Are you sure you want to cancel this appointment?" */}
-                </div>
-            );
-        },
-    },
-    {
         accessorKey: 'status',
         header: 'Status',
         cell: ({ row }) => {
-            <div className="min-w-[115px]">
-                <StatusBadge status={row.original.status} />
-            </div>;
+            return (
+                <p className="min-w-[115px]">
+                    <StatusBadge status={row.original.status} />
+                </p>
+            );
         },
     },
     {
@@ -91,6 +62,32 @@ export const columns: ColumnDef<Appointment>[] = [
                     <p className="whitespace-nowrap">
                         Dr. {doctor?.name ?? 'Cruz'}
                     </p>
+                </div>
+            );
+        },
+    },
+    {
+        id: 'actions',
+        header: () => <div className="pl-4">Action</div>,
+        cell: ({ row: { original: data } }) => {
+            return (
+                <div className="flex gap-1">
+                    <AppointmentModal
+                        type="schedule"
+                        patientId={data.id}
+                        userId={data.id}
+                        appointment={data}
+                        title="Schedule Appointment"
+                        description="Please confirm the following details to scheduled"
+                    />
+                    <AppointmentModal
+                        type="cancelled"
+                        patientId={data.id}
+                        userId={data.id}
+                        appointment={data}
+                        title="Cancel Appointment"
+                        description="Are you sure you want to cancel this appointment?"
+                    />
                 </div>
             );
         },

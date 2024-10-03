@@ -30,7 +30,7 @@ const AppointmentForm = ({
 }: {
     userId: string;
     patientId: string;
-    type: 'create' | 'cancel' | 'schedule';
+    type: 'create' | 'cancelled' | 'schedule';
     appointment?: Appointment;
     setOpen?: Dispatch<SetStateAction<boolean>>;
 }) => {
@@ -59,7 +59,7 @@ const AppointmentForm = ({
             case 'schedule':
                 status = 'schedule';
                 break;
-            case 'cancel':
+            case 'cancelled':
                 status = 'cancel';
                 break;
             default:
@@ -116,7 +116,7 @@ const AppointmentForm = ({
     let buttonLabel;
 
     switch (type) {
-        case 'cancel':
+        case 'cancelled':
             buttonLabel = 'Cancel Appointment';
             break;
         case 'create':
@@ -144,7 +144,7 @@ const AppointmentForm = ({
                     </section>
                 )}
 
-                {type !== 'cancel' && (
+                {type !== 'cancelled' && (
                     <>
                         <CustomFormField
                             fieldType={FormFieldType.SELECT}
@@ -201,19 +201,19 @@ const AppointmentForm = ({
                     </>
                 )}
 
-                {type === 'cancel' && (
+                {type === 'cancelled' && (
                     <CustomFormField
                         fieldType={FormFieldType.TEXTAREA}
                         control={form.control}
                         name="cancellationReason"
                         label="Reason for cancellation"
-                        placeholder="Enter reason for cancellation"
+                        placeholder="Urgent meeting came up"
                     />
                 )}
 
                 <SubmitButton
                     isLoading={isLoading}
-                    className={`${type === 'cancel' ? 'shad-dander-btn' : 'shad-primary-btn'} w-full`}
+                    className={`${type === 'cancelled' ? 'shad-danger-btn' : 'shad-primary-btn'} w-full`}
                 >
                     {buttonLabel}
                 </SubmitButton>
