@@ -1,18 +1,9 @@
 module.exports = {
-    parser: '@typescript-eslint/parser',
-    parserOptions: {
-        ecmaVersion: 2021,
-        sourceType: 'module',
-        ecmaFeatures: {
-            jsx: true,
-        },
-    },
     env: {
         browser: true,
         es2021: true,
         node: true,
     },
-    root: true,
     extends: [
         'next',
         'eslint:recommended',
@@ -23,25 +14,23 @@ module.exports = {
         'plugin:prettier/recommended',
         'plugin:react-hooks/recommended',
     ],
+    parser: '@typescript-eslint/parser',
+    parserOptions: {
+        ecmaFeatures: {
+            jsx: true,
+        },
+        ecmaVersion: 2021,
+        sourceType: 'module',
+    },
     plugins: [
         'prettier',
         '@typescript-eslint',
         'react',
         'react-hooks',
-        'simple-import-sort',
+        'perfectionist',
     ],
+    root: true,
     rules: {
-        // JavaScript rules
-        'prefer-const': 'warn',
-        'no-var': 'warn',
-        'no-unused-vars': 'off',
-        '@typescript-eslint/no-unused-vars': 'off',
-        '@typescript-eslint/consistent-type-assertions': 'off',
-        '@typescript-eslint/no-empty-interface': 'off',
-        '@typescript-eslint/no-explicit-any': 'off',
-        '@typescript-eslint/no-empty-object-type': 'off',
-        'object-shorthand': 'warn',
-        'quote-props': ['warn', 'as-needed'],
         // TypeScript rules
         '@typescript-eslint/array-type': [
             'warn',
@@ -49,21 +38,11 @@ module.exports = {
                 default: 'array',
             },
         ],
-        // React rules
-        'react/jsx-fragments': ['warn', 'syntax'], // Shorthand syntax for React fragments
-        'react/jsx-filename-extension': [
-            'warn',
-            {
-                extensions: ['ts', 'tsx'],
-            },
-        ],
-        'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
-        'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
-        'react/react-in-jsx-scope': 'off',
-        'react/prop-types': 'off',
-        'prettier/prettier': 'warn',
-        'simple-import-sort/imports': 'error',
-        'simple-import-sort/exports': 'error',
+        '@typescript-eslint/consistent-type-assertions': 'off',
+        '@typescript-eslint/no-empty-interface': 'off',
+        '@typescript-eslint/no-empty-object-type': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-unused-vars': 'off',
         'no-restricted-imports': [
             'error',
             {
@@ -73,47 +52,88 @@ module.exports = {
         'no-unused-vars': [
             'error',
             {
-                varsIgnorePattern: '^_',
                 argsIgnorePattern: '^_',
+                varsIgnorePattern: '^_',
             },
         ],
+        'no-var': 'warn',
+        'object-shorthand': 'warn',
+        'perfectionist/sort-exports': [
+            'error',
+            {
+                type: 'alphabetical',
+                order: 'asc',
+                ignoreCase: true,
+                partitionByComment: false,
+                partitionByNewLine: false,
+                groupKind: 'mixed',
+            },
+        ],
+        'perfectionist/sort-imports': [
+            'error',
+            {
+                type: 'alphabetical',
+                order: 'asc',
+                ignoreCase: true,
+                matcher: 'minimatch',
+                internalPattern: ['@/**'],
+                newlinesBetween: 'always',
+                maxLineLength: undefined,
+                groups: [
+                    'react',
+                    'internal',
+                    'lib',
+                    'types',
+                    'side-effect',
+                    'parent',
+                    'style',
+                ],
+                customGroups: {
+                    value: {
+                        react: ['react', 'react-*'],
+                        lib: '@/lib/*',
+                        types: '@/types/*',
+                    },
+                    type: {
+                        react: ['react', 'react-*'],
+                    },
+                },
+                environment: 'node',
+            },
+        ],
+        'perfectionist/sort-interfaces': ['error'],
+        'perfectionist/sort-objects': [
+            'error',
+            {
+                type: 'alphabetical',
+            },
+        ],
+        // JavaScript rules
+        'prefer-const': 'warn',
+        'prettier/prettier': 'warn',
+        'quote-props': ['warn', 'as-needed'],
+        'react-hooks/exhaustive-deps': 'warn', // Checks effect dependencies
+        'react-hooks/rules-of-hooks': 'error', // Checks rules of Hooks
+        'react/jsx-filename-extension': [
+            'warn',
+            {
+                extensions: ['ts', 'tsx'],
+            },
+        ],
+        // React rules
+        'react/jsx-fragments': ['warn', 'syntax'], // Shorthand syntax for React fragments
+        'react/prop-types': 'off',
+        'react/react-in-jsx-scope': 'off',
     },
     settings: {
-        react: {
-            version: 'detect',
-        },
         'import/resolver': {
             alias: {
                 extensions: ['.js', '.jsx', '.ts', '.tsx'],
                 map: [['@', '.']],
             },
         },
-    },
-    overrides: [
-        // override "simple-import-sort" config
-        {
-            files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
-            rules: {
-                'simple-import-sort/imports': [
-                    'error',
-                    {
-                        groups: [
-                            // Packages `react` related packages come first.
-                            ['^react', '^@?\\w'],
-                            // Internal packages.
-                            ['^(@|components)(/.*|$)'],
-                            // Side effect imports.
-                            ['^\\u0000'],
-                            // Parent imports. Put `..` last.
-                            ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
-                            // Other relative imports. Put same-folder imports and `.` last.
-                            ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
-                            // Style imports.
-                            ['^.+\\.?(css)$'],
-                        ],
-                    },
-                ],
-            },
+        react: {
+            version: 'detect',
         },
-    ],
+    },
 };

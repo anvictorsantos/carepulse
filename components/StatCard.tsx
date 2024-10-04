@@ -1,15 +1,16 @@
 import React from 'react';
+
 import clsx from 'clsx';
 import Image from 'next/image';
 
 interface StatCardProps {
-    type: 'appointments' | 'pending' | 'cancelled';
     count: number;
-    label: string;
     icon: string;
+    label: string;
+    type: 'appointments' | 'cancelled' | 'pending';
 }
 
-const StatCard = ({ count = 0, label, icon, type }: StatCardProps) => {
+const StatCard = ({ count = 0, icon, label, type }: StatCardProps) => {
     return (
         <div className={clsx(`stat-card bg-${type}`)}>
             <div className="flex items-center gap-4">

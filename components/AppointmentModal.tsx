@@ -10,22 +10,23 @@ import {
     DialogTitle,
     DialogTrigger,
 } from '@/components/ui/dialog';
+
 import { Appointment } from '@/types/appwrite.types';
 
 const AppointmentModal = ({
-    type,
-    patientId,
-    userId,
     appointment,
-    title,
     description,
+    patientId,
+    title,
+    type,
+    userId,
 }: {
-    type: 'create' | 'cancelled' | 'schedule';
-    patientId: string;
-    userId: string;
     appointment?: Appointment;
-    title: string;
     description: string;
+    patientId: string;
+    title: string;
+    type: 'cancel' | 'create' | 'schedule';
+    userId: string;
 }) => {
     const [open, setOpen] = useState(false);
 

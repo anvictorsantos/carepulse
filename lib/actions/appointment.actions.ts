@@ -1,15 +1,16 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
-import { ID, Query } from 'node-appwrite';
-
 import {
     APPOINTMENT_COLLECTION_ID,
     DATABASE_ID,
     databases,
 } from '@/lib/appwrite.config';
 import { parseStringify } from '@/lib/utils';
+
 import { Appointment } from '@/types/appwrite.types';
+
+import { revalidatePath } from 'next/cache';
+import { ID, Query } from 'node-appwrite';
 
 export const createAppointment = async (
     appointment: CreateAppointmentParams,
@@ -51,9 +52,9 @@ export const getRecentAppointmentList = async () => {
         );
 
         const initialCounts = {
-            scheduledCount: 0,
-            pendingCount: 0,
             cancelledCount: 0,
+            pendingCount: 0,
+            scheduledCount: 0,
         };
 
         const counts = (appointments.documents as Appointment[]).reduce(
@@ -84,8 +85,8 @@ export const getRecentAppointmentList = async () => {
 };
 
 export const updateAppointment = async ({
-    appointmentId,
     appointment,
+    appointmentId,
 }: UpdateAppointmentParams) => {
     try {
         const updatedAppointment = await databases.updateDocument(

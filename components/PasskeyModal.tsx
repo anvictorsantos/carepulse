@@ -1,9 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { useRouter } from 'next/navigation';
 
 import {
     AlertDialog,
@@ -19,7 +16,12 @@ import {
     InputOTPGroup,
     InputOTPSlot,
 } from '@/components/ui/input-otp';
+
 import { decryptKey, encryptKey } from '@/lib/utils';
+
+import Image from 'next/image';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 const PasskeyModal = () => {
     const router = useRouter();

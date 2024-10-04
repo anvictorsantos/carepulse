@@ -3,8 +3,6 @@
 import DatePicker from 'react-datepicker';
 import { Control } from 'react-hook-form';
 import PhoneInput from 'react-phone-number-input';
-import { E164Number } from 'libphonenumber-js/core';
-import Image from 'next/image';
 
 import { FormFieldType } from '@/components/forms/PatientForm';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -27,30 +25,33 @@ import { Textarea } from '@/components/ui/textarea';
 import 'react-phone-number-input/style.css';
 import 'react-datepicker/dist/react-datepicker.css';
 
+import { E164Number } from 'libphonenumber-js/core';
+import Image from 'next/image';
+
 interface CustomProps {
-    fieldType: FormFieldType;
-    control: Control<any>;
-    name: string;
-    label?: string;
-    placeholder?: string;
-    iconSrc?: string;
-    iconAlt?: string;
-    disabled?: boolean;
-    dateFormat?: string;
-    showTimeSelect?: boolean;
     children?: React.ReactNode;
+    control: Control<any>;
+    dateFormat?: string;
+    disabled?: boolean;
+    fieldType: FormFieldType;
+    iconAlt?: string;
+    iconSrc?: string;
+    label?: string;
+    name: string;
+    placeholder?: string;
     renderSkeleton?: (_field: any) => React.ReactNode;
+    showTimeSelect?: boolean;
 }
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
     const {
-        fieldType,
-        placeholder,
-        iconSrc,
-        iconAlt,
         dateFormat,
-        showTimeSelect,
+        fieldType,
+        iconAlt,
+        iconSrc,
+        placeholder,
         renderSkeleton,
+        showTimeSelect,
     } = props;
 
     switch (fieldType) {
@@ -163,7 +164,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
 };
 
 const CustomFormField = (props: CustomProps) => {
-    const { control, fieldType, name, label } = props;
+    const { control, fieldType, label, name } = props;
 
     return (
         <FormField

@@ -1,50 +1,51 @@
 'use client';
-import { ColumnDef } from '@tanstack/react-table';
-import Image from 'next/image';
-
 import AppointmentModal from '@/components/AppointmentModal';
 import StatusBadge from '@/components/StatusBadge';
 import { Doctors } from '@/constants';
+
 import { formatDateTime } from '@/lib/utils';
+
 import { Appointment } from '@/types/appwrite.types';
+
+import { ColumnDef } from '@tanstack/react-table';
+import Image from 'next/image';
 
 export const columns: ColumnDef<Appointment>[] = [
     {
-        header: '#',
         cell: ({ row }) => <p className="text-14-medium">{row.index + 1}</p>,
+        header: '#',
     },
     {
         accessorKey: 'patient',
-        header: 'Patient',
         cell: ({ row }) => {
             return (
                 <p className="text-14-medium">{row.original.patient.name}</p>
             );
         },
+        header: 'Patient',
     },
     {
         accessorKey: 'status',
-        header: 'Status',
         cell: ({ row }) => {
             return (
-                <p className="min-w-[115px]">
+                <div className="min-w-[115px]">
                     <StatusBadge status={row.original.status} />
-                </p>
+                </div>
             );
         },
+        header: 'Status',
     },
     {
         accessorKey: 'schedule',
-        header: 'Appointment',
         cell: ({ row }) => (
             <p className="text-14-regular min-w-[100px]">
                 {formatDateTime(row.original.schedule).dateTime}
             </p>
         ),
+        header: 'Appointment',
     },
     {
         accessorKey: 'primaryPhysician',
-        header: 'Doctor',
         cell: ({ row }) => {
             const doctor = Doctors.find(
                 (doc) => doc.name === row.original.primaryPhysician,
@@ -65,10 +66,9 @@ export const columns: ColumnDef<Appointment>[] = [
                 </div>
             );
         },
+        header: 'Doctor',
     },
     {
-        id: 'actions',
-        header: () => <div className="pl-4">Action</div>,
         cell: ({ row: { original: data } }) => {
             return (
                 <div className="flex gap-1">
@@ -81,7 +81,7 @@ export const columns: ColumnDef<Appointment>[] = [
                         description="Please confirm the following details to scheduled"
                     />
                     <AppointmentModal
-                        type="cancelled"
+                        type="cancel"
                         patientId={data.id}
                         userId={data.id}
                         appointment={data}
@@ -91,5 +91,7 @@ export const columns: ColumnDef<Appointment>[] = [
                 </div>
             );
         },
+        header: () => <div className="pl-4">Action</div>,
+        id: 'actions',
     },
 ];

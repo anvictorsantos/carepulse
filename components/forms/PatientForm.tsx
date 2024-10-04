@@ -2,15 +2,17 @@
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next/navigation';
-import { z } from 'zod';
 
 import CustomFormField from '@/components/CustomFormField';
 import SubmitButton from '@/components/SubmitButton';
 import { Form } from '@/components/ui/form';
 import { createUser } from '@/lib/actions/patient.actions';
+
 import { UserFormValidation } from '@/lib/validations';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
+import { z } from 'zod';
 
 /* eslint-disable no-unused-vars */
 export enum FormFieldType {
@@ -37,8 +39,8 @@ const PatientForm = () => {
     });
 
     async function onSubmit({
-        name,
         email,
+        name,
         phone,
     }: z.infer<typeof UserFormValidation>) {
         setIsLoading(true);

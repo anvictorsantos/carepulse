@@ -2,10 +2,6 @@
 
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { z } from 'zod';
 
 import CustomFormField from '@/components/CustomFormField';
 import FileUploader from '@/components/FileUploader';
@@ -22,7 +18,13 @@ import {
     PatientFormDefaultValues,
 } from '@/constants';
 import { registerPatient } from '@/lib/actions/patient.actions';
+
 import { PatientFormValidation } from '@/lib/validations';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { z } from 'zod';
 
 const RegisterForm = ({ user }: { user: User }) => {
     const router = useRouter();
@@ -59,9 +61,9 @@ const RegisterForm = ({ user }: { user: User }) => {
         try {
             const patientData = {
                 ...values,
-                userId: user.$id,
                 birthDate: new Date(values.birthDate),
                 identificationDocument: formData,
+                userId: user.$id,
             };
 
             const patient = await registerPatient(patientData);

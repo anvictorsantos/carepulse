@@ -3,10 +3,6 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { z } from 'zod';
 
 import CustomFormField from '@/components/CustomFormField';
 import { FormFieldType } from '@/components/forms/PatientForm';
@@ -18,21 +14,28 @@ import {
     createAppointment,
     updateAppointment,
 } from '@/lib/actions/appointment.actions';
+
 import { getAppointmentSchema } from '@/lib/validations';
+
 import { Appointment } from '@/types/appwrite.types';
 
+import { zodResolver } from '@hookform/resolvers/zod';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { z } from 'zod';
+
 const AppointmentForm = ({
-    userId,
-    patientId,
-    type,
     appointment,
+    patientId,
     setOpen,
+    type,
+    userId,
 }: {
-    userId: string;
-    patientId: string;
-    type: 'create' | 'cancelled' | 'schedule';
     appointment?: Appointment;
+    patientId: string;
     setOpen?: Dispatch<SetStateAction<boolean>>;
+    type: 'cancel' | 'create' | 'schedule';
+    userId: string;
 }) => {
     const router = useRouter();
     const [isLoading, setIsLoading] = useState(false);
@@ -41,11 +44,11 @@ const AppointmentForm = ({
 
     const form = useForm<z.infer<typeof AppointmentFormValidation>>({
         defaultValues: {
-            primaryPhysician: appointment ? appointment.primaryPhysician : '',
-            schedule: appointment ? new Date(appointment.schedule) : new Date(),
-            reason: appointment ? appointment.reason : '',
-            note: appointment ? appointment.note : '',
             cancellationReason: appointment?.cancellationReason ?? '',
+            note: appointment ? appointment.note : '',
+            primaryPhysician: appointment ? appointment.primaryPhysician : '',
+            reason: appointment ? appointment.reason : '',
+            schedule: appointment ? new Date(appointment.schedule) : new Date(),
         },
         resolver: zodResolver(AppointmentFormValidation),
     });
@@ -59,8 +62,8 @@ const AppointmentForm = ({
             case 'schedule':
                 status = 'schedule';
                 break;
-            case 'cancelled':
-                status = 'cancel';
+            case 'cancel':
+                status = 'cancelled';
                 break;
             default:
                 status = 'pending';
@@ -70,13 +73,13 @@ const AppointmentForm = ({
         try {
             if (type === 'create' && patientId) {
                 const appointmentData = {
-                    userId,
+                    note: values.note,
                     patient: patientId,
                     primaryPhysician: values.primaryPhysician,
-                    schedule: new Date(values.schedule),
                     reason: values.reason!,
-                    note: values.note,
+                    schedule: new Date(values.schedule),
                     status: status as Status,
+                    userId,
                 };
 
                 const appointment = await createAppointment(appointmentData);
@@ -89,15 +92,15 @@ const AppointmentForm = ({
                 }
             } else {
                 const appointmentToUpdate = {
-                    userId,
-                    appointmentId: appointment!.$id,
                     appointment: {
+                        cancellationReason: values.cancellationReason,
                         primaryPhysician: values.primaryPhysician,
                         schedule: new Date(values.schedule),
                         status: status as Status,
-                        cancellationReason: values.cancellationReason,
                     },
+                    appointmentId: appointment!.$id,
                     type,
+                    userId,
                 };
 
                 const updatedAppointment =
@@ -116,7 +119,7 @@ const AppointmentForm = ({
     let buttonLabel;
 
     switch (type) {
-        case 'cancelled':
+        case 'cancel':
             buttonLabel = 'Cancel Appointment';
             break;
         case 'create':
@@ -144,7 +147,7 @@ const AppointmentForm = ({
                     </section>
                 )}
 
-                {type !== 'cancelled' && (
+                {type !== 'cancel' && (
                     <>
                         <CustomFormField
                             fieldType={FormFieldType.SELECT}
@@ -201,7 +204,7 @@ const AppointmentForm = ({
                     </>
                 )}
 
-                {type === 'cancelled' && (
+                {type === 'cancel' && (
                     <CustomFormField
                         fieldType={FormFieldType.TEXTAREA}
                         control={form.control}
@@ -213,7 +216,7 @@ const AppointmentForm = ({
 
                 <SubmitButton
                     isLoading={isLoading}
-                    className={`${type === 'cancelled' ? 'shad-danger-btn' : 'shad-primary-btn'} w-full`}
+                    className={`${type === 'cancel' ? 'shad-danger-btn' : 'shad-primary-btn'} w-full`}
                 >
                     {buttonLabel}
                 </SubmitButton>
