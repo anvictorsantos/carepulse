@@ -10,54 +10,41 @@ export const parseStringify = (value: any) => JSON.parse(JSON.stringify(value));
 export const convertFileToUrl = (file: File) => URL.createObjectURL(file);
 
 // FORMAT DATE TIME
-export const formatDateTime = (dateString: Date | string) => {
+export const formatDateTime = (
+    dateString: Date | string,
+    timeZone: string = Intl.DateTimeFormat().resolvedOptions().timeZone,
+) => {
     const dateTimeOptions: Intl.DateTimeFormatOptions = {
-        // abbreviated month name (e.g., 'Oct')
-        day: 'numeric',
-
-        // numeric year (e.g., '2023')
-        hour: 'numeric',
-
-        // numeric minute (e.g., '30')
-        hour12: true,
-
-        // numeric hour (e.g., '8')
-        minute: 'numeric',
-
+        day: 'numeric', // numeric day of the month (e.g., '25')
+        hour: 'numeric', // numeric hour (e.g., '8')
+        hour12: true, // use 12-hour clock (true) or 24-hour clock (false),
+        minute: 'numeric', // numeric minute (e.g., '30')
         // weekday: "short", // abbreviated weekday name (e.g., 'Mon')
-        month: 'short',
-
-        // numeric day of the month (e.g., '25')
-        year: 'numeric', // use 12-hour clock (true) or 24-hour clock (false)
+        month: 'short', // abbreviated month name (e.g., 'Oct')
+        timeZone, // use the provided timezone
+        year: 'numeric', // numeric year (e.g., '2023')
     };
 
     const dateDayOptions: Intl.DateTimeFormatOptions = {
-        // abbreviated month name (e.g., 'Oct')
-        day: '2-digit',
-
-        // numeric year (e.g., '2023')
-        month: '2-digit',
-
-        weekday: 'short',
-        // abbreviated weekday name (e.g., 'Mon')
-        year: 'numeric', // numeric day of the month (e.g., '25')
+        day: '2-digit', // numeric day of the month (e.g., '25')
+        month: '2-digit', // abbreviated month name (e.g., 'Oct')
+        timeZone, // use the provided timezone
+        weekday: 'short', // abbreviated weekday name (e.g., 'Mon')
+        year: 'numeric', // numeric year (e.g., '2023')
     };
 
     const dateOptions: Intl.DateTimeFormatOptions = {
-        // numeric year (e.g., '2023')
-        day: 'numeric',
-
-        month: 'short',
-        // abbreviated month name (e.g., 'Oct')
-        year: 'numeric', // numeric day of the month (e.g., '25')
+        day: 'numeric', // numeric day of the month (e.g., '25')
+        month: 'short', // abbreviated month name (e.g., 'Oct')
+        timeZone, // use the provided timezone
+        year: 'numeric', // numeric year (e.g., '2023')
     };
 
     const timeOptions: Intl.DateTimeFormatOptions = {
-        hour: 'numeric',
-        // numeric minute (e.g., '30')
-        hour12: true,
-        // numeric hour (e.g., '8')
-        minute: 'numeric', // use 12-hour clock (true) or 24-hour clock (false)
+        hour: 'numeric', // numeric hour (e.g., '8')
+        hour12: true, // use 12-hour clock (true) or 24-hour clock (false)
+        minute: 'numeric', // numeric minute (e.g., '30')
+        timeZone, // use the provided timezone
     };
 
     const formattedDateTime: string = new Date(dateString).toLocaleString(

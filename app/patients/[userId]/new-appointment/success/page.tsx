@@ -3,9 +3,11 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Doctors } from '@/constants';
 import { getAppointment } from '@/lib/actions/appointment.actions';
+import { getUser } from '@/lib/actions/patient.actions';
 
 import { formatDateTime } from '@/lib/utils';
 
+import * as Sentry from '@sentry/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -18,6 +20,9 @@ const SuccessPage = async ({
     const doctor = Doctors.find(
         (doc) => doc.name === appointment.primaryPhysician,
     );
+    const user = await getUser(userId);
+
+    Sentry.metrics.set('user_view_appointment-success', user.name);
 
     const getYear = () => {
         return new Date().getFullYear();
