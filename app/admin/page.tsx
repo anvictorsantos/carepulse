@@ -24,7 +24,7 @@ const Admin = async () => {
                     />
                 </Link>
 
-                <p className="admin-main">Admin Dashboard</p>
+                <p className="text-16-semibold">Admin Dashboard</p>
             </header>
 
             <main className="admin-main">

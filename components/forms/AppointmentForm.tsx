@@ -48,7 +48,9 @@ const AppointmentForm = ({
             note: appointment ? appointment.note : '',
             primaryPhysician: appointment ? appointment.primaryPhysician : '',
             reason: appointment ? appointment.reason : '',
-            schedule: appointment ? new Date(appointment.schedule) : new Date(),
+            schedule: appointment
+                ? new Date(appointment.schedule)
+                : new Date(Date.now()),
         },
         resolver: zodResolver(AppointmentFormValidation),
     });
