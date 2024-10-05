@@ -1,29 +1,29 @@
 export const GenderOptions = ['male', 'female', 'other'];
 
 export const PatientFormDefaultValues = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    birthDate: new Date(Date.now()),
-    gender: 'male' as Gender,
     address: '',
-    occupation: '',
+    allergies: '',
+    birthDate: new Date(Date.now()),
+    currentMedication: '',
+    disclosureConsent: false,
+    email: '',
     emergencyContactName: '',
     emergencyContactNumber: '',
-    primaryPhysician: '',
-    insuranceProvider: '',
-    insurancePolicyNumber: '',
-    allergies: '',
-    currentMedication: '',
     familyMedicalHistory: '',
-    pastMedicalHistory: '',
-    identificationType: 'Birth Certificate',
-    identificationNumber: '',
+    firstName: '',
+    gender: 'male' as Gender,
     identificationDocument: [],
-    treatmentConsent: false,
-    disclosureConsent: false,
+    identificationNumber: '',
+    identificationType: 'Birth Certificate',
+    insurancePolicyNumber: '',
+    insuranceProvider: '',
+    lastName: '',
+    occupation: '',
+    pastMedicalHistory: '',
+    phone: '',
+    primaryPhysician: '',
     privacyConsent: false,
+    treatmentConsent: false,
 };
 
 export const IdentificationTypes = [
@@ -80,7 +80,7 @@ export const Doctors = [
 ];
 
 export const StatusIcon = {
-    scheduled: '/assets/icons/check.svg',
-    pending: '/assets/icons/pending.svg',
     cancelled: '/assets/icons/cancelled.svg',
+    pending: '/assets/icons/pending.svg',
+    scheduled: '/assets/icons/check.svg',
 };

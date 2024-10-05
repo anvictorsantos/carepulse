@@ -60,7 +60,7 @@ const AppointmentForm = ({
 
         switch (type) {
             case 'schedule':
-                status = 'schedule';
+                status = 'scheduled';
                 break;
             case 'cancel':
                 status = 'cancelled';
@@ -189,16 +189,18 @@ const AppointmentForm = ({
                                 fieldType={FormFieldType.TEXTAREA}
                                 control={form.control}
                                 name="reason"
-                                label="Reason for appointment"
-                                placeholder="Enter reason for appointment"
+                                label="Appointment reason"
+                                placeholder="Annual montly check-up"
+                                disabled={type === 'schedule'}
                             />
 
                             <CustomFormField
                                 fieldType={FormFieldType.TEXTAREA}
                                 control={form.control}
                                 name="note"
-                                label="Note"
-                                placeholder="Enter note"
+                                label="Comments/notes"
+                                placeholder="Prefer afternoon appointments, if possible"
+                                disabled={type === 'schedule'}
                             />
                         </div>
                     </>

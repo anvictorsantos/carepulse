@@ -1,36 +1,36 @@
 import { Models } from 'node-appwrite';
 
 export interface Patient extends Models.Document {
-    userId: string;
-    name: string;
-    email: string;
-    phone: string;
-    birthDate: Date;
-    gender: Gender;
     address: string;
-    occupation: string;
+    allergies?: string;
+    birthDate: Date;
+    currentMedication?: string;
+    email: string;
     emergencyContactName: string;
     emergencyContactNumber: string;
-    primaryPhysician: string;
-    insuranceProvider: string;
-    insurancePolicyNumber: string;
-    allergies?: string;
-    currentMedication?: string;
     familyMedicalHistory?: string;
-    pastMedicalHistory?: string;
-    identificationType?: string;
-    identificationNumber?: string;
+    gender: Gender;
     identificationDocument?: FormData;
+    identificationNumber?: string;
+    identificationType?: string;
+    insurancePolicyNumber: string;
+    insuranceProvider: string;
+    name: string;
+    occupation: string;
+    pastMedicalHistory?: string;
+    phone: string;
+    primaryPhysician: string;
     privacyConsent: boolean;
+    userId: string;
 }
 
 export interface Appointment extends Models.Document {
+    cancellationReason: string | null;
+    note: string;
     patient: Patient;
-    schedule: Date;
-    status: Status;
     primaryPhysician: string;
     reason: string;
-    note: string;
+    schedule: Date;
+    status: Status;
     userId: string;
-    cancellationReason: string | null;
 }
