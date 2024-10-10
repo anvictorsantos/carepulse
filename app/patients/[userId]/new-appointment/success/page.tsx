@@ -38,7 +38,7 @@ const SuccessPage = async ({
                         width={1000}
                         alt="logo"
                         className="h-10 w-fit"
-                        style={{ color: undefined }}
+                        style={{ color: '' }}
                     />
                 </Link>
 
@@ -48,7 +48,7 @@ const SuccessPage = async ({
                         height={300}
                         width={280}
                         alt="succes"
-                        style={{ color: undefined }}
+                        style={{ color: '' }}
                     />
                     <h2 className="header mb-6 max-w-[600px] text-center">
                         Your{' '}
@@ -70,7 +70,7 @@ const SuccessPage = async ({
                                 width={100}
                                 height={100}
                                 className="size-6"
-                                style={{ color: undefined }}
+                                style={{ color: '' }}
                             />
                         )}
                         <p className="whitespace-nowrap">Dr. {doctor?.name}</p>
@@ -81,7 +81,7 @@ const SuccessPage = async ({
                             height={24}
                             width={24}
                             alt="calendar"
-                            style={{ color: undefined }}
+                            style={{ color: '' }}
                         />
                         <p>{formatDateTime(appointment.schedule).dateTime}</p>
                     </div>

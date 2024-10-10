@@ -82,7 +82,7 @@ const PasskeyModal = () => {
                             height={20}
                             onClick={() => closeModal()}
                             className="cursor-pointer"
-                            style={{ color: undefined }}
+                            style={{ color: '' }}
                         />
                     </AlertDialogTitle>
                     <AlertDialogDescription>

@@ -20,7 +20,7 @@ const StatusBadge = ({ status }: { status: Status }) => {
                 width={24}
                 height={24}
                 className="h-fit w-3"
-                style={{ color: undefined }}
+                style={{ color: '' }}
             />
             <p
                 className={clsx('text-12-semibold capitalize', {

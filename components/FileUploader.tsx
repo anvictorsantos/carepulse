@@ -31,7 +31,7 @@ const FileUploader = ({ files, onChange }: FileUploaderProps) => {
                     height={1000}
                     alt="uploaded image"
                     className="max-h-[400px] overflow-hidden object-cover"
-                    style={{ color: undefined }}
+                    style={{ color: '' }}
                 />
             ) : (
                 <>
@@ -40,7 +40,7 @@ const FileUploader = ({ files, onChange }: FileUploaderProps) => {
                         width={40}
                         height={40}
                         alt="upload"
-                        style={{ color: undefined }}
+                        style={{ color: '' }}
                     />
                     <div className="file-upload_label">
                         <p className="text-14-regular">
