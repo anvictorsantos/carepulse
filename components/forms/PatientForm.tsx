@@ -33,7 +33,7 @@ const PatientForm = () => {
         defaultValues: {
             email: '',
             name: '',
-            phone: "'",
+            phone: '',
         },
         resolver: zodResolver(UserFormValidation),
     });
