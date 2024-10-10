@@ -25,6 +25,7 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
                         width={1000}
                         alt="patient"
                         className="mb-12 h-10 w-fit"
+                        style={{ color: undefined }}
                     />
 
                     <RegisterForm user={user} />
@@ -39,6 +40,7 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
                 width={1000}
                 alt="patient"
                 className="side-img max-w-[50%]"
+                style={{ color: undefined }}
             />
         </div>
     );

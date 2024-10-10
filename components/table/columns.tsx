@@ -59,6 +59,7 @@ export const columns: ColumnDef<Appointment>[] = [
                         width={100}
                         height={100}
                         className="size-8"
+                        style={{ color: undefined }}
                     />
                     <p className="whitespace-nowrap">
                         Dr. {doctor?.name ?? 'Cruz'}

@@ -21,6 +21,7 @@ const Admin = async () => {
                         height={32}
                         className="h-8 w-fit"
                         alt="logo"
+                        style={{ color: undefined }}
                     />
                 </Link>
 

@@ -4,6 +4,21 @@ import * as Sentry from '@sentry/nextjs';
 import Head from 'next/head';
 
 export default function Page() {
+    async function handleError() {
+        await Sentry.startSpan(
+            {
+                name: 'Example Frontend Span',
+                op: 'test',
+            },
+            async () => {
+                const res = await fetch('/api/sentry-example-api');
+                if (!res.ok) {
+                    throw new Error('Sentry Example Frontend Error');
+                }
+            },
+        );
+    }
+
     return (
         <div>
             <Head>
@@ -14,20 +29,10 @@ export default function Page() {
                 />
             </Head>
 
-            <main
-                style={{
-                    alignItems: 'center',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    minHeight: '100vh',
-                }}
-            >
-                <h1 style={{ fontSize: '4rem', margin: '14px 0' }}>
+            <main className="flex min-h-screen flex-col items-center justify-center">
+                <h1 className="my-[14px] text-4xl">
                     <svg
-                        style={{
-                            height: '1em',
-                        }}
+                        className="h-[1em]"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 200 44"
                     >
@@ -41,34 +46,8 @@ export default function Page() {
                 <p>Get started by sending us a sample error:</p>
                 <button
                     type="button"
-                    style={{
-                        backgroundColor: '#AD6CAA',
-                        border: 'none',
-                        borderRadius: '4px',
-                        color: 'white',
-                        cursor: 'pointer',
-                        fontSize: '14px',
-                        margin: '18px',
-                        padding: '12px',
-                    }}
-                    onClick={async () => {
-                        await Sentry.startSpan(
-                            {
-                                name: 'Example Frontend Span',
-                                op: 'test',
-                            },
-                            async () => {
-                                const res = await fetch(
-                                    '/api/sentry-example-api',
-                                );
-                                if (!res.ok) {
-                                    throw new Error(
-                                        'Sentry Example Frontend Error',
-                                    );
-                                }
-                            },
-                        );
-                    }}
+                    className="m-[18px] cursor-pointer rounded-[4px] border-none bg-[#AD6CAA] p-[12px] text-sm text-white"
+                    onClick={handleError}
                 >
                     Throw error!
                 </button>
@@ -80,7 +59,7 @@ export default function Page() {
                     </a>
                     .
                 </p>
-                <p style={{ marginTop: '24px' }}>
+                <p className="mt-[24px]">
                     For more information, see{' '}
                     <a href="https://docs.sentry.io/platforms/javascript/guides/nextjs/">
                         https://docs.sentry.io/platforms/javascript/guides/nextjs/

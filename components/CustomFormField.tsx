@@ -65,6 +65,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                             width={24}
                             alt={iconAlt || 'icon'}
                             className="ml-2"
+                            style={{ color: undefined }}
                         />
                     )}
                     <FormControl>
@@ -125,6 +126,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
                         height={24}
                         width={24}
                         className="ml-2"
+                        style={{ color: undefined }}
                     />
                     <FormControl>
                         <DatePicker

@@ -61,24 +61,28 @@ module.exports = {
         'perfectionist/sort-exports': [
             'error',
             {
-                type: 'alphabetical',
-                order: 'asc',
+                groupKind: 'mixed',
                 ignoreCase: true,
+                order: 'asc',
                 partitionByComment: false,
                 partitionByNewLine: false,
-                groupKind: 'mixed',
+                type: 'alphabetical',
             },
         ],
         'perfectionist/sort-imports': [
             'error',
             {
-                type: 'alphabetical',
-                order: 'asc',
-                ignoreCase: true,
-                matcher: 'minimatch',
-                internalPattern: ['@/**'],
-                newlinesBetween: 'always',
-                maxLineLength: undefined,
+                customGroups: {
+                    type: {
+                        react: ['react', 'react-*'],
+                    },
+                    value: {
+                        lib: '@/lib/*',
+                        react: ['react', 'react-*'],
+                        types: '@/types/*',
+                    },
+                },
+                environment: 'node',
                 groups: [
                     'react',
                     'internal',
@@ -88,17 +92,13 @@ module.exports = {
                     'parent',
                     'style',
                 ],
-                customGroups: {
-                    value: {
-                        react: ['react', 'react-*'],
-                        lib: '@/lib/*',
-                        types: '@/types/*',
-                    },
-                    type: {
-                        react: ['react', 'react-*'],
-                    },
-                },
-                environment: 'node',
+                ignoreCase: true,
+                internalPattern: ['@/**'],
+                matcher: 'minimatch',
+                maxLineLength: undefined,
+                newlinesBetween: 'always',
+                order: 'asc',
+                type: 'alphabetical',
             },
         ],
         'perfectionist/sort-interfaces': ['error'],

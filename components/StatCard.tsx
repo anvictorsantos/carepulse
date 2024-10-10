@@ -20,6 +20,7 @@ const StatCard = ({ count = 0, icon, label, type }: StatCardProps) => {
                     width={32}
                     alt={label}
                     className="size-8 w-fit"
+                    style={{ color: undefined }}
                 />
                 <h2 className="text-32-bold text-white">{count}</h2>
             </div>

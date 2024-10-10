@@ -25,6 +25,7 @@ export default async function NewAppointment({
                         width={1000}
                         alt="patient"
                         className="mb-12 h-10 w-fit"
+                        style={{ color: undefined }}
                     />
 
                     <AppointmentForm
@@ -45,6 +46,7 @@ export default async function NewAppointment({
                 width={1000}
                 alt="appointment"
                 className="side-img max-w-[390px] bg-bottom"
+                style={{ color: undefined }}
             />
         </div>
     );
